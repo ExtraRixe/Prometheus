@@ -4,15 +4,15 @@ name = input("Enter your name: ").capitalize()
 while name.isalnum() is False:
     name = input("Please don't leave this blank\n>>Enter your name: ").capitalize()
 
-bet = input("Hi! "+name+", please place your bet: ")
-while int(bet) % 10 != 0:
-    bet = input("Bet amount must be of 10's\n>>Hi! " + name + ", please place your bet: ")
+bet = int(input("Hi! "+name+", please place your bet: "))
+while bet % 10 != 0 or bet < 10:
+    bet = int(input("Bet amount must be of 10's\n>>Hi! " + name + ", please place your bet: "))
 
 bold='\033[1m'
 regular='\033[0m'
 
 max = int(input("You have 3 turns. Now, give me the max number to generate: "))
-while max < 4:
+while max < 5:
     max = int(input("Max number MUST be >= 4\nYou have 3 turns. Now, give me the max number to generate.\n"))
 
 ai = random.randrange(1,max)
