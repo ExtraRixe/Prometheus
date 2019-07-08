@@ -9,8 +9,11 @@ def invalidInput(val):
         val = int(input("Value must be greater than 0\t:"))
     return val
 
-
+sum = 0
+string = ''
 n = int(input('Enter Value: '))
 n = invalidInput(n)
 for i in range(n):
-    print(fibo(i))
+    string += str(fibo(i))+'+'
+    sum += fibo(i)
+print(f'{string[:-1]}=\t{sum}')
