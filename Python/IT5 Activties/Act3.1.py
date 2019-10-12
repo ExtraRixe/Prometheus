@@ -1,10 +1,6 @@
 def power(base, exponent):
     # Your code goes here
     return base**exponent
-    """
-        The function works as power of a number such that 2**3 is equal to 8
-    """
-
 
 def decToBinary(value):
     # Your code goes here'
@@ -13,23 +9,12 @@ def decToBinary(value):
     else:
         return str(bin(value))[2:]
 
-    """
-        The function converts an integer value to binary digits such that 9 is 1001
-    """
-
-
 def isPalindrome(valStr):
     # Your code goes here
     if valStr == valStr[::-1]:
         return True
     else:
         return False
-    """
-       Determines whether a value is palindrome or Not such that
-       1001 - Palindrome: True
-       1002 - Palindrome: False
-       0110 - Palindrome: True
-    """
 
 def invalidInput(val):
     while int(val) < 1:

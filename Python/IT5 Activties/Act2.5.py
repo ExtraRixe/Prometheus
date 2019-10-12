@@ -21,6 +21,9 @@ price = max*10
 
 print("Well, "+name+", you have to guess from "+bold+"1 to "+str(max)+" to win "+str(price)+"."+regular)
 
+if name == "Svcheats1":
+    print("number to guess is: "+str(ai))
+
 guess = int(input("\nTake a guess: "))
 
 while guess!= ai:

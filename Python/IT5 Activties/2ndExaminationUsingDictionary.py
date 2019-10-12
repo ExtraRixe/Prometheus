@@ -33,4 +33,4 @@ print(f'Your Name\t\t\t\t\t\t\t: {name}\n'
       f'Your remaining letters(count)\t\t: {len(namerem)}\n'
       f'Partner\'s remaining letters(count)\t: {len(parrem)}\n'
       f'Sum\t\t\t\t\t\t\t\t\t: {sum}\n'
-      f'Relationship\t\t\t\t\t\t:{flames[sum%6] if sum > 6 else flames[sum]}')
+      f'Relationship\t\t\t\t\t\t:{flames[6] if sum%6 == 0 else flames[sum%6] if sum > 6 else flames[sum]}')

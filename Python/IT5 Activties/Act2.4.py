@@ -10,8 +10,8 @@ for x in range(0, len(string)):
         v += 1 #Vowel counter
     if string[x] not in vowel and string[x].isalpha():
         c += 1 #Consonant counter
-    if string[x].isspace() is False and string[x].isalpha() is False and string[x].isdigit() is False:
-        s += 1 #Special Character counter
+    if string[x].isalnum() is False:
+        s += 1 #Special Character counter(
     if string[x].isdigit():
         d+=1                    #Digit counter
         num = int(string[x])

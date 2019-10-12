@@ -3,8 +3,6 @@ from operator import itemgetter
 def add_pet():
     petList.append([input("Enter pet name: "),int(input("Enter pet age: ")),input("Enter pet specie: "),input("Enter pet breed: "),input("Enter pet gender: "),int(input("Enter pet price: "))])
     #petList.append([name,age,specie,breed,gender,price])
-
-
 def get_index(i):
     list_count = 0
     for x in petList:
@@ -12,7 +10,6 @@ def get_index(i):
            return list_count
         list_count += 1
         #petList[find_pet]
-
 def edit_pet():
     name = input("Enter name/index to replace: ")
     res = ''
@@ -36,28 +33,27 @@ def edit_pet():
             new_name = input("Enter new name: ")
             petList[x].pop(0)
             petList[x].insert(0,new_name)
-
-def find_pet(name):
+def find_pet(name,choice):
     list_count = 0
     found = []
 
-    if name.isdigit() is True:
+    if choice == 'i':
         name = int(name)
         if name > len(petList)-1:
               found.append(['Index out of Range!'])
         else:
             found.append(petList[name])
             return found
-    else:
+    if choice == 'v':
         for x in petList:
             if name in x:
                 found.append(petList[list_count])
             list_count += 1
+
     if not found:
-        found.append(['Not Found!'])
+            found.append(['Not Found!'])
     return found
         #petList[find_pet]
-
 def insert_pet():
     res = ''
     name = input("Enter name of pet to move: ")
@@ -75,7 +71,6 @@ def insert_pet():
             petList.pop(x+1)
         else:
             petList.pop(x)
-
 def remove_pet():
     name = input('Enter name to remove: ')
     try:
@@ -83,15 +78,12 @@ def remove_pet():
         petList.pop(x)
     except:
         print('Name does not exist!')
-
-
 def display(list_name):
     for x in list_name:
         print('|'.join(map(str,x)))
 
-
-petList = [['bogart',9,'dog','chowchow','m',2000],['art',2,'cat','siopao','f',250],['bob',5,'dog','askal','m',2500],['don',1,'rat','siomai','f',500]]
-petprice = []
+            
+petList = [['bogart',9,'dog','chowchow','m',2000],['art',2,'cat','siopao','f',250],['bob',5,'dog','kilawin','m',2500],['don',1,'rat','siomai','f',500]]
 choice = ''
 while choice != 't':
     choice = input("[A]dd - Allow user to add pet name in a list.\n"
@@ -110,9 +102,11 @@ while choice != 't':
         insert_pet()
         print('\n\n')
     if choice == 's':
-        find = input('Search: ')
-        # print('\n'.join(map(str,find_pet(find))))
-        display(find_pet(find))
+        vb = ''
+        while vb != 'b':
+            vb = input('Search by: \n[V]alue\n[I]ndex\n[B]ack\n>>').lower()
+            find = input('Search: ')
+            display(find_pet(find,vb))
         print('\n\n')
     if choice == 'e':
         edit_pet()

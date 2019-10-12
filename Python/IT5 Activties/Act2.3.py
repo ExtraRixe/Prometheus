@@ -1,4 +1,4 @@
-vowel = ["a","e","i","o","u"]
+vowel = "aeiou"
 text = input("Enter a word: ")
 
 while text.islower() is False or text.isalpha() is False or text.isspace() is True or len(text) <=2 or len(text) >=11 or len(text.split()) >1:
@@ -13,3 +13,5 @@ if first in vowel:
 
 else:
     print("\nOriginal Word: "+text+"\t Piglatin: "+text[1:]+first+"ay")
+
+

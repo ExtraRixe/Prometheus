@@ -1,7 +1,7 @@
 import array as a
 
-def cleaner(x):
-    return str(x)[12:-2]
+def cleaner(string):
+    return str(string)[12:-2]
 
 def invalidInput(val):
     while int(val) < 1:

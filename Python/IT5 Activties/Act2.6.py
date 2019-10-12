@@ -12,7 +12,7 @@ num=input("Enter the number: ")
 while num[:2] != "09" or len(num) > 11 or len(num) < 11 or num.isdigit() is False or num.isspace() is True:
     num = input("Mobile number must start with '09'\nMobile number must ONLY contain 11-digits\n>>Enter the number: ")
 
-if num[2:4] in smart:
+if num[2:4] is smart:
     print(str(num)+"\tSMART")
 if num[2:4] in tnt:
     print(str(num)+"\tTNT")

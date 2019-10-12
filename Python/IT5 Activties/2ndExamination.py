@@ -19,7 +19,9 @@ sum = len(namerem)+len(parrem)                                                 #
 mod = sum                                                                      #The value of mod is the value of sum
 
 if sum > 6:                                                                    #If sum is greater than 6 << 6 is the length of the word 'FLAMES'
-    mod = sum%6                                                                #Gets the remainder of sum/6
+    mod = sum % 6                                                              #Gets the remainder of sum/6
+    if mod == 0:
+        mod = 6
                                                                                #F = 1, L = 2, A = 3, M = 4, E = 5, S = 6
 if mod == 0:
     rel = 'Not Compatible'
