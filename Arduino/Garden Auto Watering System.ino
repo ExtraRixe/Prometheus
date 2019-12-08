@@ -2,11 +2,12 @@
 #include <SimpleDHT.h>
 
 //Debug *Change Value to True for debug mode
-bool DEBUG = true;
+bool DEBUG = false;
 
 // Global Values
 bool watering = false;
 bool wateredToday = false;
+String today;
 
 //Soil Moisture Sensor
 int moistureSensor = 0; 
@@ -21,7 +22,7 @@ SimpleDHT11 dht11(humiditySensor);
 virtuabotixRTC RTC(6, 7, 8);
 
 //Relay
-int relay = 4;
+int relay = 3;
 
 //Photoresistor
 int photores = 1;
@@ -30,7 +31,10 @@ int PRvalue;
 //----------------------INITIALIZATION-----------------------//
 void setup() {
     Serial.begin(9600);
-    pinMode(4, OUTPUT);
+    RTC.updateTime();
+    today = (String)(RTC.dayofmonth)+"/"+(String)(RTC.month)+"/"+(String)(RTC.year);
+
+    pinMode(relay, OUTPUT);
 
                         if (DEBUG == true){
                         Serial.println("-=DEBUG BEGIN=-");
@@ -50,7 +54,15 @@ void setup() {
                     
                         Serial.println("**RTC**");
                         RTC.updateTime();
-                        Serial.println(getTime());
+                        Serial.println(getTimeDate());
+                        Serial.println();
+                        
+                        Serial.println("**RELAY/VALVE**");
+                        digitalWrite(relay,HIGH);
+                        Serial.println("VALVE STATUS: OPEN");
+                        delay(3000);
+                        digitalWrite(relay,LOW);
+                        Serial.println("VALVE STATUS: CLOSE");
                         
                         Serial.println("...\n...\n...");
                         Serial.println("-=DEBUG END=-");
@@ -75,24 +87,36 @@ int getSoilMoisture(){
   int SMmap = map(SMvalue,0,1024,100,0);
   return SMmap;
 }
+
 int getPhotoresistor(){
   PRvalue = analogRead(photores); 
   int PRmap = map(PRvalue,0,1024,0,100);
   return PRmap;
 }
-String getTime(){
-return (String)(RTC.dayofmonth)+"/"+(String)(RTC.month)+"/"+(String)(RTC.year)+" "+(String)(RTC.hours)+":"+(String)(RTC.minutes)+":"+(String)(RTC.seconds);
+
+String getTimeDate(){
+  return (String)(RTC.dayofmonth)+"/"+(String)(RTC.month)+"/"+(String)(RTC.year)+" "+(String)(RTC.hours)+":"+(String)(RTC.minutes)+":"+(String)(RTC.seconds);  
 }
 
 //----------------------LOOP-----------------------//
 
 void loop() {
   RTC.updateTime();
+  String runningDate = (String)(RTC.dayofmonth)+"/"+(String)(RTC.month)+"/"+(String)(RTC.year);  
   PRvalue = analogRead(photores);
+  if(today!=runningDate){
+    today = runningDate;
+    wateredToday = false;
+  }
+  if(wateredToday == false && RTC.hours > 6 && /*RTC.hours < 16* &&*/ getSoilMoisture() < 70 ){
+    digitalWrite(relay,HIGH);
+    watering = true;
+    delay(5000);
+  }
+  else if(watering == true && getSoilMoisture() > 70){
+    digitalWrite(relay,LOW);
+    watering = false;
+    wateredToday = true;
+  }
   
-  
-
-
-
 }
-
